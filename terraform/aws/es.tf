@@ -24,6 +24,15 @@ resource "aws_elasticsearch_domain" "monitoring-framework" {
     git_repo             = "terragoat"
     yor_trace            = "95131dec-d7c9-49bb-9aff-eb0e2736603b"
   }
+  domain_endpoint_options {
+    enforce_https = true
+  }
+  encrypt_at_rest {
+    enabled = true
+  }
+  log_publishing_options {
+    cloudwatch_log_group_arn = "CKV_ANY"
+  }
 }
 
 data aws_iam_policy_document "policy" {

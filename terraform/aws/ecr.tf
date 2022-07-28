@@ -1,6 +1,6 @@
 resource aws_ecr_repository "repository" {
   name                 = "${local.resource_prefix.value}-repository"
-  image_tag_mutability = "MUTABLE"
+  image_tag_mutability = "IMMUTABLE"
 
   tags = merge({
     Name = "${local.resource_prefix.value}-repository"
@@ -14,6 +14,12 @@ resource aws_ecr_repository "repository" {
     git_repo             = "terragoat"
     yor_trace            = "7a3ec657-fa54-4aa2-8467-5d08d6c90bc2"
   })
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+  encryption_configuration {
+    encryption_type = "KMS"
+  }
 }
 
 locals {

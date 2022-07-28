@@ -14,12 +14,10 @@ resource google_compute_instance "server" {
     subnetwork = google_compute_subnetwork.public-subnetwork.name
     access_config {}
   }
-  can_ip_forward = true
 
   metadata = {
+    block-project-ssh-keys = true
     block-project-ssh-keys = false
-    enable-oslogin         = false
-    serial-port-enable     = true
   }
   labels = {
     git_commit           = "37914a45800114d263c0dcd74b81b9dd01307e13"
